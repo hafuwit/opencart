@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>HFW Sample Module</name>
+	<code>hfw_sample_module</code>
+	<version>1.0.0</version>
+	<author>HFW Software</author>
+	<link>https://opencart.com</link>
+	<file path="admin/language/en-gb/common/column_left.php">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+				$_['text_other_status']         = 'Other Statuses';
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+				$_['text_hfwmodule']                        = 'HFW Sample';
+				$_['text_hfwmodule_about']          		= 'About';
+				$_['text_hfwmodule_account']                = 'Account';
+				$_['text_hfwmodule_info']       			= 'Information';
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/pl-PL/common/column_left.php">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+				$_['text_other_status']         = 'Other Statuses';
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+				$_['text_hfwmodule']                        = 'HFW Sample';
+				$_['text_hfwmodule_about']          		= 'About';
+				$_['text_hfwmodule_account']                = 'Account';
+				$_['text_hfwmodule_info']       			= 'Information';
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/controller/common/column_left.php">
+		<operation>
+			<search trim="true" index="0"><![CDATA[// Marketing ]]></search>
+			<search><![CDATA[
+				if ($this->user->hasPermission('access', 'report/report')) {
+			]]></search>
+
+			<add position="before"><![CDATA[
+
+				$hfwmodule = array();
+				if (VERSION >= '3.0.0.0') {
+					if ($this->user->hasPermission('access', 'extension/hfwmodule/about')) {
+						$hfwmodule[] = array(
+							'name'	   => $this->language->get('text_hfwmodule_about'),
+							'href'     => $this->url->link('extension/hfwmodule/about', 'user_token=' . $this->session->data['user_token'], true),
+							'children' => array()
+						);
+					}
+
+					if ($this->user->hasPermission('access', 'extension/hfwmodule/account')) {
+						$hfwmodule[] = array(
+							'name'	   => $this->language->get('text_hfwmodule_account'),
+							'href'     => $this->url->link('extension/hfwmodule/account', 'user_token=' . $this->session->data['user_token'], true),
+							'children' => array()
+						);
+					}
+
+					if ($this->user->hasPermission('access', 'extension/hfwmodule/info')) {
+						$hfwmodule[] = array(
+							'name'	   => $this->language->get('text_hfwmodule_info'),
+							'href'     => $this->url->link('extension/hfwmodule/info', 'user_token=' . $this->session->data['user_token'], true),
+							'children' => array()
+						);
+					}
+				}
+				else {
+					if ($this->user->hasPermission('access', 'extension/hfwmodule/example')) {
+						$hfwmodule[] = array(
+							'name'	   => 'Example',
+							'href'     => $this->url->link('extension/hfwmodule/example', 'user_token=' . $this->session->data['user_token'], true),
+							'children' => array()
+						);
+					}
+				}
+				if ($hfwmodule) {
+					$data['menus'][] = array(
+						'id'       => 'menu-hfwmodule',
+						'icon'	   => 'fa-shopping-bag',
+						'name'	   => $this->language->get('text_hfwmodule'),
+						'href'     => '',
+						'children' => $hfwmodule
+					);
+				}
+			]]></add>
+		</operation>
+	</file>
+	 <file path="catalog/controller/extension/payment/cod.php">
+        <operation error="skip">
+            <search><![CDATA[$json = array();]]></search>
+           <add position="before"><![CDATA[
+				$this->load->model('extension/shipping/hfwsample');
+				$this->model_extension_shipping_hfwsample->getQuote('test');
+            ]]></add>
+        </operation>
+    </file>
+</modification>
