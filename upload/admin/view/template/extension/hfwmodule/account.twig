@@ -1,0 +1,39 @@
+{{ header }}
+{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				{{ text_hfw_sample_module }}
+			</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li>
+					<a href="
+						{{ breadcrumb['href'] }}">
+						{{ breadcrumb['text'] }}
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="container-fluid">
+			<div class="validate-form-label">
+				<div class="alert alert-danger">
+					<i class="fa fa-exclamation-circle"></i>{{ text_error }}
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-user"></i>{{ text_account }}</h3>
+				</div>
+				<div class="panel-body">
+					ahihi
+				</div>
+			</div>
+		</div>
+	</div>
+	<link href="view/stylesheet/upsmodule/common.css" type="text/css" rel="stylesheet" />
+</div>
+{{ footer }}
