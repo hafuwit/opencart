@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  SonNK2@fsoft.com.vn
+ *  hafuwit@gmail.com
  */
 
 class ModelExtensionModuleHfwmodule extends Model {
@@ -16,7 +16,7 @@ class ModelExtensionModuleHfwmodule extends Model {
         $this->config_file = $this->getConfigFile($this->id, $this->sub_versions);
     }
     /*
-     *  SonNK2@fsoft.com.vn
+     *  hafuwit@gmail.com
      */
 
     public function getConfigFile($id, $sub_versions) {
